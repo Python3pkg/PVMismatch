@@ -7,7 +7,7 @@ Created on Jul 29, 2012
 @author: marko
 """
 from pvmismatch.pvmismatch_tk.pvapplication_tk import PVapplicaton
-from Tkinter import Tk
+from tkinter import Tk
 import sys
 import re
 
@@ -59,7 +59,7 @@ if __name__ == "__main__":
         dims = None
     if dims is not None:
         dim_reset_or_dims = lambda dims: (not dims) * 'reset' + dims
-        print "dimensions: {}".format(dim_reset_or_dims(dims))
+        print("dimensions: {}".format(dim_reset_or_dims(dims)))
     root = Tk()
     app = PVapplicaton(root)
     root.geometry(dims)

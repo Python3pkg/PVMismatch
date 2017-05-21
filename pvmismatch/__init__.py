@@ -77,8 +77,8 @@ else:
 VERSION = GIT_TAG  # version
 
 __author__ = 'Mark Mikofski'
-__email__ = u'mark.mikofski@sunpowercorp.com'
-__url__ = u'https://github.com/SunPower/PVMismatch'
+__email__ = 'mark.mikofski@sunpowercorp.com'
+__url__ = 'https://github.com/SunPower/PVMismatch'
 __version__ = VERSION
 __release__ = 'Kenya Ketchup'
 __all__ = ['pvconstants', 'pvcell', 'pvmodule', 'pvstring', 'pvsystem']

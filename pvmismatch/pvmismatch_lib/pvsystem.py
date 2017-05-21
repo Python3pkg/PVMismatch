@@ -117,7 +117,7 @@ class PVsystem(object):
             for pvstr in self.pvstrs:
                 pvstr.setSuns(Ee)
         else:
-            for pvstr, pvmod_Ee in Ee.iteritems():
+            for pvstr, pvmod_Ee in Ee.items():
                 pvstr = int(pvstr)
                 self.pvstrs[pvstr] = copy(self.pvstrs[pvstr])
                 self.pvstrs[pvstr].setSuns(pvmod_Ee)
@@ -155,7 +155,7 @@ class PVsystem(object):
             for pvstr in self.pvstrs:
                 pvstr.setTemps(Tc)
         else:
-            for pvstr, pvmod_Tc in Tc.iteritems():
+            for pvstr, pvmod_Tc in Tc.items():
                 pvstr = int(pvstr)
                 self.pvstrs[pvstr] = copy(self.pvstrs[pvstr])
                 self.pvstrs[pvstr].setTemps(pvmod_Tc)
@@ -173,14 +173,14 @@ class PVsystem(object):
         # or make the specified sysPlot current and clear it
         if not sysPlot:
             sysPlot = plt.figure()
-        elif isinstance(sysPlot, (int, basestring)):
+        elif isinstance(sysPlot, (int, str)):
             sysPlot = plt.figure(sysPlot)
         else:
             try:
                 sysPlot = plt.figure(sysPlot.number)
             except TypeError as e:
-                print '%s is not a figure.' % sysPlot
-                print 'Sorry, "plotSys" takes a "int", "str" or "Figure".'
+                print('%s is not a figure.' % sysPlot)
+                print('Sorry, "plotSys" takes a "int", "str" or "Figure".')
                 raise e
         sysPlot.clear()
         plt.subplot(2, 1, 1)

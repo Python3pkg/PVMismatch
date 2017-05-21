@@ -5,9 +5,9 @@ Created on Aug 18, 2012
 @author: mmikofski
 """
 
-from Tkconstants import W, E, RIGHT
-from Tkinter import Frame, Label, Button, DoubleVar, Entry, IntVar
-import tkFont
+from tkinter.constants import W, E, RIGHT
+from tkinter import Frame, Label, Button, DoubleVar, Entry, IntVar
+import tkinter.font
 
 PVAPP_TXT = 'PVmismatch'
 INTEGERS = '0123456789'
@@ -31,7 +31,7 @@ class AdvCnf_tk(Frame):
         top.resizable(False, False)  # not resizable in x or y
         top.title(PVAPP_TXT)  # set title bar
         top.protocol("WM_DELETE_WINDOW", self.quit)  # close window to quit
-        CAPTION_FONT = tkFont.nametofont('TkCaptionFont')  # font for titles
+        CAPTION_FONT = tkinter.font.nametofont('TkCaptionFont')  # font for titles
 
         # variables
         cellnum = self.cellnum = IntVar(self, name='cellnum')
@@ -248,8 +248,8 @@ class AdvCnf_tk(Frame):
     def validateWidget(self, *args):
         # W = Tkinter.W = 'w' is already used, so use W_ instead
         (d, i, P, s, S, v, V, W_) = args  # @UnusedVariable # IGNORE:W0612
-        print "OnValidate:",
-        print("d={}, i={}, P={}, s={}, S={}, v={}, V={}, W={}".format(*args))
+        print("OnValidate:", end=' ')
+        print(("d={}, i={}, P={}, s={}, S={}, v={}, V={}, W={}".format(*args)))
         if W_ == '.advCnfTop.advCnf.rsEntry':
             valType = FLOATS
             valTest = lambda val: float(val)  # IGNORE:W0108
@@ -304,8 +304,8 @@ class AdvCnf_tk(Frame):
 
     def invalidWidget(self, *args):
         (d, i, P, s, S, v, V, W_) = args  # @UnusedVariable # IGNORE:W0612
-        print "OnInvalid: ",
-        print("d={}, i={}, P={}, s={}, S={}, v={}, V={}, W={}".format(*args))
+        print("OnInvalid: ", end=' ')
+        print(("d={}, i={}, P={}, s={}, S={}, v={}, V={}, W={}".format(*args)))
         if W_ == ".advCnfTop.advCnf.rsEntry":
             errText = 'Invalid series resistance!'
         elif W_ == ".advCnfTop.advCnf.rshEntry":

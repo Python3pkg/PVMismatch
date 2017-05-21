@@ -5,7 +5,7 @@ Created on Jul 30, 2012
 @author: mmikofski
 """
 
-from Tkinter import Frame, Label, Button, Toplevel
+from tkinter import Frame, Label, Button, Toplevel
 #from Tkinter import IntVar
 #import tkFont
 # use absolute imports instead of relative, so modules are portable

@@ -212,7 +212,7 @@ def get_series_cells(cell_pos_column, prev_col=None):
     # current column that correspond to cells between parallel crossties in the
     # previous column
     if prev_col:
-        cell_pos_column = zip(prev_col, cell_pos_column)
+        cell_pos_column = list(zip(prev_col, cell_pos_column))
     for cell in cell_pos_column:
         if prev_col:
             cell, next_col = cell

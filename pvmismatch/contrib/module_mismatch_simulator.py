@@ -32,8 +32,8 @@ try:
     from pvmismatch import PVsystem, PVmodule, PVcell, PVconstants
     from pvmismatch.pvmismatch_lib.pvmodule import STD72, STD96, STD128
 except ImportError:
-    print "PVMismatch not found on path! Please use 'pip install -e path/to/pvmismatch'"
-    print "or 'export PYTHONPATH=path/to/pvmismatch:$PYTHONPATH' first."
+    print("PVMismatch not found on path! Please use 'pip install -e path/to/pvmismatch'")
+    print("or 'export PYTHONPATH=path/to/pvmismatch:$PYTHONPATH' first.")
     import sys
     sys.exit(-1)
 
@@ -141,7 +141,7 @@ def plotting_calcs(pvmod, ivp=None):
         ivp.modHeight = 12
     else:
         ivp.modHeight = 16
-    interp_funcs = [interp1d(ivp.Isubstr[i], ivp.Vsubstr[i]) for i in xrange(3)]
+    interp_funcs = [interp1d(ivp.Isubstr[i], ivp.Vsubstr[i]) for i in range(3)]
     substring_Vmps = [f(ivp.Imp) for f in interp_funcs]
     for n, ss_Vmp in enumerate(substring_Vmps):
         if ss_Vmp < 0:
@@ -270,9 +270,9 @@ def pvsys_defs_user_input(npts=101, user_set_temp=False, tcell=298.15):
     Prompt a user to input array definitions from the command line. Returns all
     info necessary to create a PVsystem instance
     """
-    modsizeinput = int(raw_input("Module Size? (1=72c, 2=96c, 3=128c): "))
+    modsizeinput = int(input("Module Size? (1=72c, 2=96c, 3=128c): "))
     while modsizeinput != 1 and modsizeinput != 2 and modsizeinput != 3:
-        modsizeinput = input("Please input 1, 2, or 3, please. ")
+        modsizeinput = eval(input("Please input 1, 2, or 3, please. "))
     if modsizeinput == 1:
         cellpos = STD72
         modHeight = 12
@@ -285,7 +285,7 @@ def pvsys_defs_user_input(npts=101, user_set_temp=False, tcell=298.15):
         cellpos = STD128
         modHeight = 16
         numCells = 128
-    tcell = int(raw_input("Cell temperature (deg C)? "))
+    tcell = int(input("Cell temperature (deg C)? "))
     tcell = tcell + 273.15
     pvcelldict = {'Tcell': tcell, 'pvconst': PVconstants(npts=npts)}
     pvmoddict = {'cell_pos': cellpos, 'Vbypass': -0.5, 'pvconst': PVconstants(npts=npts)}
@@ -427,7 +427,7 @@ def full_update(val, output=None, ivp0=None, plotobjs=None):
                 output['ax12'], output['ax03'], output['ax_4'], output['x'], output['y'])
     plt.draw()
     t1 = (sw * sh, s_ps.val, ivp0.Pmp, 100 * ivp0.Pmp / Pmp0)
-    print '{0:^6} {1:^6,.2f} {2:^6,.2f} {3:^7,.2f}'.format(*t1)
+    print('{0:^6} {1:^6,.2f} {2:^6,.2f} {3:^7,.2f}'.format(*t1))
 
 
 def set_the_shade(val):
@@ -440,7 +440,7 @@ def save_the_shade(val):
         dicts.append({'ps': shd.pershade, 'sw': shd.sw, 'sh': shd.sh,
                       'sy': shd.sy, 'sx': shd.sx,
                       'numberCells': pvmod1.numberCells})
-    filename = raw_input("File name? ")
+    filename = input("File name? ")
     filename = 'JSONshade/' + filename + '.json'
     fo = open(filename, 'w')
     shades_json = json.dump(dicts, fo, sort_keys=True, indent=2)
@@ -465,10 +465,10 @@ if __name__ == "__main__":
     plotobjs = PlotObjs()
     update = partial(full_update, output=output, ivp0=ivp0, plotobjs=plotobjs)
     ClearLast = partial(clear_last_full, update=update)
-    print "Pmp0: {}".format(Pmp0)
-    print ""
-    print '{0:6} {1:^6} {2:^6} {3:^7}'.format('#Cells', '%Shade', 'Pmp', '%ofPmp0')
-    print '----------------------------'
+    print("Pmp0: {}".format(Pmp0))
+    print("")
+    print('{0:6} {1:^6} {2:^6} {3:^7}'.format('#Cells', '%Shade', 'Pmp', '%ofPmp0'))
+    print('----------------------------')
     ps0 = 90
     sw0 = 1
     sh0 = 1

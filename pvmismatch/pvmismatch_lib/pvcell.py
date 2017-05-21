@@ -95,7 +95,7 @@ class PVcell(object):
         """
         # TODO: use __dict__.update(), check for floats and update IV curve
         # self.__dict__.update(kwargs)
-        for k, v in kwargs.iteritems():
+        for k, v in kwargs.items():
             setattr(self, k, v)
 
     @property

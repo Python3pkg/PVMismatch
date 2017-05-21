@@ -40,9 +40,9 @@ def standard_cellpos_pat(nrows, ncols_per_substr):
     for substr_cols in ncols_per_substr:
         ncols[0], ncols[1] = ncols[1], ncols[1] + substr_cols
         newsubstr = []
-        for col in xrange(*ncols):
+        for col in range(*ncols):
             newrow = []
-            for row in xrange(nrows):
+            for row in range(nrows):
                 idx = col * nrows
                 if col % 2 == 0:
                     idx += row
@@ -95,9 +95,9 @@ def crosstied_cellpos_pat(nrows_per_substrs, ncols, partial=False):
     for substr_row in nrows_per_substrs:
         nrows[0], nrows[1] = nrows[1], nrows[1] + substr_row
         newsubstr = []
-        for col in xrange(ncols):
+        for col in range(ncols):
             newrow = []
-            for row in xrange(*nrows):
+            for row in range(*nrows):
                 crosstie = True
                 if partial and newrow:
                     crosstie = False
@@ -129,7 +129,7 @@ def combine_parallel_circuits(IVprev_cols, pvconst):
     Irows, Vrows = [], []
     Isc_rows, Imax_rows = [], []
     for IVcols in zip(*IVprev_cols):
-        Iparallel, Vparallel = zip(*IVcols)
+        Iparallel, Vparallel = list(zip(*IVcols))
         Iparallel = np.asarray(Iparallel)
         Vparallel = np.asarray(Vparallel)
         Irow, Vrow = pvconst.calcParallel(
@@ -235,7 +235,7 @@ class PVmodule(object):
         """
         if cells is None:
             if np.isscalar(Ee):
-                new_pvcells = range(self.numberCells)  # new list of cells
+                new_pvcells = list(range(self.numberCells))  # new list of cells
                 old_pvcells = dict.fromkeys(self.pvcells)  # same as set(pvcells)
                 for cell_id, pvcell in enumerate(self.pvcells):
                     if old_pvcells[pvcell] is None:
@@ -244,7 +244,7 @@ class PVmodule(object):
                     else:
                         new_pvcells[cell_id] = old_pvcells[pvcell]
                 self.pvcells = new_pvcells
-                pvcell_set = old_pvcells.itervalues()
+                pvcell_set = iter(old_pvcells.values())
                 for pvc in pvcell_set:
                     pvc.Ee = Ee
             elif np.size(Ee) == self.numberCells:
@@ -305,7 +305,7 @@ class PVmodule(object):
         """
         if cells is None:
             if np.isscalar(Tc):
-                new_pvcells = range(self.numberCells)  # new list of cells
+                new_pvcells = list(range(self.numberCells))  # new list of cells
                 old_pvcells = dict.fromkeys(self.pvcells)  # same as set(pvcells)
                 for cell_id, pvcell in enumerate(self.pvcells):
                     if old_pvcells[pvcell] is None:
@@ -314,7 +314,7 @@ class PVmodule(object):
                     else:
                         new_pvcells[cell_id] = old_pvcells[pvcell]
                 self.pvcells = new_pvcells
-                pvcell_set = old_pvcells.itervalues()
+                pvcell_set = iter(old_pvcells.values())
                 for pvc in pvcell_set:
                     pvc.Tcell = Tc
             elif np.size(Tc) == self.numberCells:
@@ -455,7 +455,7 @@ class PVmodule(object):
                         IVprev_cols, self.pvconst
                     )
                 else:
-                    Iparallel, Vparallel = zip(*IVall_cols)
+                    Iparallel, Vparallel = list(zip(*IVall_cols))
                     Iparallel = np.asarray(Iparallel)
                     Vparallel = np.asarray(Vparallel)
                     Isub, Vsub = self.pvconst.calcParallel(
